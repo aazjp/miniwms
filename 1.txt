@@ -1,1 +1,0 @@
-inventory\models.py:INVENTORY_IN和INVENTORY_OUT可以合并成一个表格

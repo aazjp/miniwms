@@ -1,12 +1,6 @@
-import svgwrite
 import xml.etree.ElementTree as ET
-import sqlite3
 from django.http.response import JsonResponse
-import json
-import datetime
-import time
 import  barcode
-import re
 from style import models 
 from miniwms.settings import MEDIA_ROOT
 
