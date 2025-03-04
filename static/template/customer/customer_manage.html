@@ -1,0 +1,63 @@
+{% extends 'TEMPLATE_BASE\LOGINED_BASE.html' %}
+
+{% block content %}
+
+<div class="container p-3">
+    <div class="row"><h1>添加客户</h1></div>
+    <div class="row">
+        <form class="form-group row g-1"
+            action="{% url 'customer:customer_manage' %}"
+            method="post">
+            {% csrf_token %}
+            <div class="row g-1">
+                <div class="col-3">
+                    <input type="text" class="form-control" name="id"
+                        placeholder="{{ customer_id_add }}">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" name="name"
+                        placeholder="客户姓名">
+                </div>
+                <div class="col-3">
+
+                    <input type="text" class="form-control" name="phone"
+                        placeholder="客户电话">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" name="email"
+                        placeholder="客户邮箱">
+                </div>
+            </div>
+            <div class="row g-1">
+                <div class="col-4">
+
+                    <input type="text" class="form-control" name="address"
+                        placeholder="客户地址">
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" name="remark"
+                        placeholder="客户备注">
+                </div>
+                <div class="col-4">
+                    <input type="submit" class="btn btn-primary w-100"
+                        value="提交">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% if messages %}
+
+{% for msg in messages %}
+{{ msg }}
+{% endfor %}
+
+{% endif %}
+<div class="row">
+    {% include 'customer\customer_manage_table.html' %}
+</div>
+{% include 'pagination.html' %}
+
+{% endblock content %}

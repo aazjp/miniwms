@@ -1,0 +1,95 @@
+{% extends 'TEMPLATE_BASE\LOGINED_BASE.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- 标题 -->
+    <div class="row">
+        <p class="col-md-12 text-center fs-1">款式管理</p>
+    </div>
+    <div class="row">
+        <!-- 新增按钮 -->
+        <div class="col-md-4 me-auto ms-auto">
+            <hr>
+            <a class="btn btn-primary  w-100"
+                href="{%url 'style:style_add' %}">新建款式</a>
+            <hr>
+        </div>
+    </div>
+
+</div>
+
+<p>
+    <form action="{% url 'style:style_manage' %}" method="get">
+        <div class="row">
+            <div class="col">
+                <label for="id">款号</label>
+                <input type="text" name="id" placeholder="款号"
+                    class="form-control">
+            </div>
+            <div class="col">
+                <label for="name">名称</label>
+                <input type="text" name="name" placeholder="名称"
+                    class="form-control">
+            </div>
+            <div class="col">
+                <label for="season">季节</label>
+                <input type="text" name="season" placeholder="季节"
+                    class="form-control">
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col">
+                <label for="cost_start">成本价</label>
+                <input type="number" name="cost_start" placeholder="成本价"
+                    class="form-control d-inline-block  ">
+            </div>
+            <div class="col">
+                <label for="cost_end">至</label>
+                <input type="number" name="cost_end" placeholder="成本价"
+                    class="form-control d-inline-block">
+            </div>
+            <div class="col">
+                <label for="price_start">售价</label>
+                <input type="number" name="price_start" placeholder="售价"
+                    class="form-control">
+            </div>
+            <div class="col">
+                <label for="price_end">至</label>
+                <input type="number" name="price_end" placeholder="售价"
+                    class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="create_date_start">创建日期</label>
+                <input type="date" name="create_date_start" placeholder="日期"
+                    class="form-control">
+            </div>
+            <div class="col">
+                <label for="create_date_end">至</label>
+                <input type="date" name="create_date_end" placeholder="日期"
+                    class="form-control">
+            </div>
+            <div class="col">
+                <label for="update_date_start">更新日期</label>
+                <input type="date" name="update_date_start" placeholder="日期"
+                    class="form-control">
+            </div>
+            <div class="col">
+                <label for="update_date_end">至</label>
+                <input type="date" name="update_date_end" placeholder="日期"
+                    class="form-control">
+            </div>
+        </div>
+
+        <input type="submit" value="搜索" class="btn btn-primary mt-2 w-100">
+
+    </form>
+</p>
+
+{% include 'style\style_manage_table.html' %}
+{% include 'pagination.html' %}
+{% endblock content %}

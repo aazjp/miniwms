@@ -1,0 +1,46 @@
+{% extends 'TEMPLATE_BASE\FORM_BASE.html' %}
+
+{% block title %}
+编辑spu
+{% endblock title %}
+
+{% block form_url %}
+{% url 'style:style_update' spu.id%}
+{% endblock form_url %}
+
+{% block form %}
+<!-- 表单输入 -->
+<img class="img-thumbnail" style="width: 100px;height: 100px;"
+    src="{{spu.img}}" alt>
+<label for="img">修改图片</label>
+<input type="file" class="form-control" id="img" name="img" placeholder="请上传图片">
+<label for="id">id</label>
+<input type="text" class="form-control" name="id" placeholder="{{ spu.id }}"
+    readonly>
+<label for="name">款式名称</label>
+<input type="text" class="form-control" name="name"
+    value="{{ spu.name }}">
+<label for="season">季节</label>
+<input type="text" class="form-control" name="season"
+    value="{{ spu.season }}">
+    <label for="cost">成本</label>
+    <input type="text" class="form-control" name="cost"
+        value="{{ spu.cost }}">
+<label for="price">价格</label>
+<input type="text" class="form-control" name="price"
+    value="{{ spu.price }}">
+
+<label for="pattern_design">版型</label>
+<input class="form-control" id="pattern_design" name="pattern_design"
+    value={{ spu.pattern_design }}>
+<label for="design_source">设计来源</label>
+<input class="form-control" id="design_source" name="design_source"
+    value={{ spu.design_source }}>
+<label for="remark">备注</label>
+<p><textarea class="form-control" id="remark" name="remark" >{{spu.remark}}</textarea></p>
+
+<p>
+    <input class="btn btn-primary w-100" type="submit" value="提交">
+</p>
+
+{% endblock form %}

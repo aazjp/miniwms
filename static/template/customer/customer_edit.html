@@ -1,0 +1,43 @@
+{% extends 'TEMPLATE_BASE\FORM_BASE.html' %}
+
+{% block title %}
+        客户信息编辑
+{% endblock title %}
+
+{% block form_url %}
+{% url 'customer:customer_edit' customer_info.id %}
+{% endblock form_url %}
+
+{% block form %}
+<div class="form-group">
+    <label for="id">ID</label>
+    <input type="text" class="form-control" id="id" name="id"
+        placeholder="{{customer_info.id}}" readonly>
+    <label for="name">姓名</label>
+    <input type="text" class="form-control" id="name"
+        name="name" value="{{customer_info.name}}">
+    <label for="phone">手机号</label>
+    <input type="text" class="form-control" id="phone"
+        name="phone" value="{{customer_info.phone}}">
+    <label for="address">地址</label>
+    <input type="text" class="form-control" id="address"
+        name="address" value="{{customer_info.address}}">
+    <label for="email">邮箱</label>
+    <input type="text" class="form-control" id="email"
+        name="email" value="{{customer_info.email}}">
+    <label for="remark">备注</label>
+    <input type="text" class="form-control" id="remark"
+        name="remark" value="{{customer_info.remark}}">
+
+    <p>
+        <label for="create_time">创建时间</label>
+        <input type="text" class="form-control" id="create_time"
+            name="create_time" placeholder="{{customer_info.create_time}}"
+            readonly>
+    </p>
+    <p>
+        <button type="submit" class="btn btn-primary w-100">提交</button>
+
+    </p>
+</div>
+{% endblock form %}

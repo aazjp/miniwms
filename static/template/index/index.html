@@ -1,0 +1,225 @@
+{% extends 'TEMPLATE_BASE/LOGINED_BASE.html' %}
+{% load static %}
+
+{% block content %}
+<script src="{% static 'css/echarts.min.js' %}"></script>
+
+<div class="row">
+
+    <div class="col-9">
+        <div class="row m-3">
+            <div class="col">
+                <div class="card">
+                    <p>
+                        今日销售额：<span id="todaySales">
+
+                            {% if today_total_sales.total_sales %}
+                            {{today_total_sales.total_sales}}
+                            {% else %}
+                            0
+                            {% endif %}
+                        </span>元
+                    </p>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <p>
+                        今日订单数：<span id="todayOrder">
+                            {% if today_count_orders.total_orders %}
+                            {{today_count_orders.total_orders}}
+                            {% else %}
+                            0
+                            {%endif%}
+                        </span>单
+                    </p>
+
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="card">
+                    <p>
+                        待提交订单:<span id="pendingOrder">
+
+                            {% if not_submitted_orders_count.order_count %}
+                            {{not_submitted_orders_count.order_count}}
+                            {% else %}
+                            0
+                            {% endif %}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row m-3">
+                <div class="col-6">
+                    <div class="card p-1">
+                        <div id="spuSaleschart"
+                            style="width: 400px; height: 300px;"></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card p-1">
+                        <div id="topTenConsumersChart"
+                            style="width: 400px; height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-4">
+                    <div class="card p-2">
+                        <div id="main"
+                            style="width: 450px;height: 450px;"></div>
+
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="card p-2">
+                        <div id="monthlySalesChart"
+                            style="width: 900px; height: 450px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-3">
+            <div class="row p-3 w-100 "
+                style="height: 800px; border: 1px solid #ccc;overflow: auto;">
+                <h1>库存预警</h1>
+                {% for i in insufficient_sku_list %}
+                <p class="border border-danger p-3">
+                    款号:{{i.sku_id}}库存:{{i.stock}}库位:{{i.loc}}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- sku销量表 -->
+    <script type="text/javascript">
+    // 封装初始化图表的函数
+    function initChart(chartId, options) {
+        const chartDom = document.getElementById(chartId);
+        const chart = echarts.init(chartDom);
+        chart.setOption(options);
+    }
+
+    // 处理 SKU 销售量分析图表
+    try {
+        var spu_sales_num = {{ spu_sales_num|safe }};
+        var spu_sales_options = {
+            title: {
+                text: 'SPU销售前10名'
+            },
+            tooltip: {},
+            xAxis: {
+                data: spu_sales_num.name,
+                name: 'SKU'
+            },
+            yAxis: {
+                name: '数量'
+            },
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: spu_sales_num.values
+            }]
+        };
+        initChart('spuSaleschart', spu_sales_options);
+    } catch (error) {
+        console.error('SKU 销售量数据解析错误:', error);
+    }
+</script>
+    <!-- 顾客消费排名表 -->
+    <script type="text/javascript">
+try {
+        var top_ten_consumers = {{ top_ten_consumers|safe }};
+        var top_ten_consumers_options = {
+            title: {
+                text: '顾客消费排名前10名'
+            },
+            tooltip: {},
+            xAxis: {
+                data: top_ten_consumers.customer_id_keys,
+                name: 'SKU'
+            },
+            yAxis: {
+                name: '数量'
+            },
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: top_ten_consumers.customer_id_values
+            }]
+        };
+        initChart('topTenConsumersChart', top_ten_consumers_options);
+    } catch (error) {
+        console.error('SKU 销售量数据解析错误:', error);
+    }
+</script>
+
+    <!-- 月销量表 -->
+    <script type="text/javascript">
+    // 处理月度销售统计图表
+    try {
+        var monthly_sales = {{ monthly_sales|safe }};
+        const monthly_sales_options = {
+            title: {
+                text: '月度销售统计表'
+            },
+            tooltip: {},
+            xAxis: {
+                type: 'category',
+                data: monthly_sales.month_keys
+            },
+            yAxis: {
+                type: 'value',
+                name: '销售额（元）'
+            },
+            series: [{
+                name: '销售额',
+                data: monthly_sales.month_values,
+                type: 'line'
+            }]
+        };
+        initChart('monthlySalesChart', monthly_sales_options);
+    } catch (error) {
+        console.error('月度销售数据解析错误:', error);
+    }
+</script>
+    <script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var rawData = {{ spu_sales_num|safe }};
+    var formattedData = [];
+        for (var i = 0; i < rawData.name.length; i++) {
+            formattedData.push({
+                value: rawData.values[i],
+                name: rawData.name[i]
+            });
+        }
+    var option = {
+        title: {
+            text: '不同产品销售额占比',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        series: [
+            {
+                name: '销售额',
+                type: 'pie',
+                radius: '50%',
+                data: formattedData,
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+    {% endblock content %}

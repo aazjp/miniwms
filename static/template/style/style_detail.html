@@ -1,0 +1,24 @@
+{% extends 'TEMPLATE_BASE\LOGINED_BASE.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <p>款式图片:<img class="img-fluid" style="height: 250px;" src="{{spu.img}}"
+                alt></p>
+    </div>
+    <div class="col">
+        <p>款式编号:{{spu.id}}</p>
+        <p>款式名称:{{spu.name}}</p>
+        <p>成本价:{{spu.cost}}</p>
+        <p>销售价:{{spu.price}}</p>
+        <p>季节:{{spu.season}}</p>
+        <p>版型:{{spu.pattern_design}}</p>
+        <p>设计来源:{{spu.design_source}}</p>
+        <p>备注:{{spu.remark}}</p>
+    </div>
+</div>
+
+{% include 'style\style_detail_table.html' %}
+
+{% endblock content %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static '/css/bootstrap.min.css'%}">
+    <script src="{%static '/css/bootstrap.bundle.min.js'%}"></script>
+</head>
+
+<body class="">
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 bg-danger-subtle me-auto ms-auto">
+                    <form action="{%url 'main:login_view'%}" method="post">
+                        {%csrf_token%}
+                        <label for="username">账号</label>
+                        <input type="text" class="form-control" name="username" id="username" value="admin" required
+                            autofocus><br>
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" name="password" id="password" value="admin" required
+                            autofocus><br>
+                        <input type="submit" class="btn btn-primary" name="submit" value="登录" id="submit"><br>
+                    </form><hr>
+
+                        <a class="btn btn-primary" href="{%url 'main:register_view'%}">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

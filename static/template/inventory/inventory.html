@@ -1,0 +1,101 @@
+{%extends 'TEMPLATE_BASE\LOGINED_BASE.html'%}
+{%block content%}
+<div class="container-fluid">
+  <div class="row">
+    <p class="col-md-12 text-center fs-1">库存查看</p>
+  </div>
+
+  <p>
+
+    <form action="{% url 'inventory:inventory' %}" method="get">
+      <div class="row">
+
+        <div class="col">
+          <label for="cost_start">成本价格</label>
+          <input type="number" class="form-control" id="cost_start"
+            name="cost_start" placeholder="起始成本价格">
+        </div>
+        <div class="col">
+          <label for="cost_end"></label>
+          <input type="number" class="form-control" id="cost_end"
+            name="cost_end" placeholder="结束成本价格">
+        </div>
+        <div class="col">
+          <label for="price_start">零售价</label>
+          <input type="number" class="form-control" id="price_start"
+            name="price_start"
+            placeholder="起始零售价">
+        </div>
+        <div class="col">
+          <label for="price_end"></label>
+          <input type="number" class="form-control" id="price_end"
+            name="price_end"
+            placeholder="结束零售价">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="storage_location">库位</label>
+          <select name="storage_location" id="storage_location"
+            class="form-select">
+            <option value>所有库位</option>
+            {% for i in loc_list %}
+            <option
+              value="{{i.id}}">{{i.location_name}}:{{i.location_address}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="name">名称</label>
+          <input type="text" class="form-control" id="name" name="name"
+            placeholder="名称">
+        </div>
+
+        <div class="col">
+          <label for="sku_id">SKU</label>
+          <input type="text" class="form-control" id="sku_id" name="sku_id"
+            placeholder="SKU">
+
+        </div>
+
+        <div class="col">
+          <label for="remark">备注</label>
+          <input type="text" class="form-control" id="remark" name="remark"
+            placeholder="备注">
+
+        </div>
+
+      </div>
+      <p>
+        <div class="row">
+          <div class="col">
+            <label for="stock_start">库存数量</label>
+            <input type="number" class="form-control" id="stock_start"
+              name="stock_start" placeholder="起始库存数量">
+
+          </div>
+          <div class="col">
+            <label for="stock_end"></label>
+            <input type="number" class="form-control" id="stock_end"
+              name="stock_end" placeholder="结束库存数量">
+          </div>
+
+        </div>
+      </p>
+      <p>
+        <input type="submit" class="btn btn-primary w-100" value="查询">
+
+      </p>
+
+    </form>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    {% include 'inventory/inventory_table.html' %}
+  </div>
+</div>
+{% include 'pagination.html' %}
+{%endblock content%}

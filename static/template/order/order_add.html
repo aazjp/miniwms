@@ -1,0 +1,35 @@
+{% extends 'TEMPLATE_BASE/FORM_BASE.html' %}
+
+{% block title %}
+新增订单
+{% endblock title %}
+
+{% block form_url %}
+{% url 'order:order_add' %}
+{% endblock form_url %}
+
+{% block form %}
+
+
+<div class="form-container">
+    <form action="{% url 'order:order_add' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="customer_id" class="form-label">选择客户</label>
+            <select name="customer_id" id="customer_id" class="form-select">
+                {% for customer in customer_list %}
+                <option value="{{ customer.id }}">{{ customer.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <p>
+             <button type="submit" class="custom-btn w-100">提交</button>
+        </p>
+       
+    </form>
+</div>
+{% endblock form %}
+
+{% block back_to %}
+    {% url 'order:order_manage' %}
+{% endblock back_to %}

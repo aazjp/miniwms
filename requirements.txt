@@ -1,0 +1,5 @@
+Django
+django_softdelete
+svgwrite
+django_bootstrap5
+django_crispy_forms

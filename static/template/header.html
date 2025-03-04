@@ -1,0 +1,88 @@
+{%block header%}
+<nav class="navbar navbar-expand navbar-light bg-info ">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="{%url 'index:index'%}">inventory</a>
+
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn btn-primary text-white" href="" id="style_dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">款式</a>
+                <div class="dropdown-menu" aria-labelledby="style_dropdown">
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary" href="{% url 'style:style_manage' %}">
+                            管理款式
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary" href="{% url 'style:color_manage' %}">
+                            管理颜色
+                        </a>
+                    </div>
+            </li>
+
+
+            <li class=" nav-item dropdown ms-3">
+                <a class="nav-link dropdown-toggle btn btn-primary text-white" href="#" id="dropdownId"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">库存</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{% url 'inventory:inventory' %}">
+                            查看库存
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{% url 'inventory:inventory_in' %}">
+                            扫码入库
+                        </a>
+                    </div>
+
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{% url 'inventory:inventory_out' %}">
+                            扫码出库
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{%url 'order:order_add'%}">
+                            订单出库
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{% url 'inventory:inventory_record' %}">
+                            出入库记录
+                        </a>
+                    </div>
+            </li>
+            <li class=" nav-item dropdown ms-3">
+                <a class="nav-link dropdown-toggle btn btn-primary text-white" href="#" id="dropdownId"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">订单</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{%url 'order:order_manage'%}">
+                            订单管理
+                        </a>
+                    </div>
+            </li>
+          
+            <li class=" nav-item dropdown ms-3">
+                <a class="nav-link dropdown-toggle btn btn-primary text-white" href="#" id="dropdownId"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">客戶管理</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <div class="dropdown-item">
+                        <a class="btn btn-outline-primary " href="{%url 'customer:customer_manage'%}">
+                            客戶管理
+                        </a>
+                    </div>
+            </li>
+        </ul>
+
+      
+
+        <a class="btn btn-outline-primary ms-5" href="{%url 'main:logout_view'%}">退出登录</a>
+
+    </div>
+</nav>
+
+
+{%endblock%}

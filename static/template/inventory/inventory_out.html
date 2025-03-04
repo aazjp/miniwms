@@ -1,0 +1,41 @@
+{% extends 'TEMPLATE_BASE\FORM_BASE.html' %}
+
+{% block title %}
+扫码出库
+{% endblock title %}
+
+{% block form_url %}
+{% url 'inventory:inventory_out' %}
+{% endblock form_url %}
+
+{% block form %}
+<!-- 表单输入 -->
+<p>
+    <label for="id">条码</label>
+    <input class="form-control" type="text" name="sku_id" autofocus>
+</p>
+<p>
+    <label for="storage_location_id">出库库位</label>
+    <select name="storage_location_id" class="form-control" id="">
+        {% for i in storage_location_list %}
+        <option value="{{i.id}}">{{i.location_name}}:{{i.location_address}}</option>
+        {% endfor %}
+    </select>
+</p>
+<p>
+    <label for="num">数量</label>
+    <input class="form-control" type="text" name="num"  value="1">
+</p>
+<p>
+    <input type="submit" class="btn btn-primary w-100" value="提交">
+</p>
+<p>
+    {% for msg in messages %}
+    {{ msg }}
+    {% endfor %}
+</p>
+{% endblock form %}
+
+{% block back_to %}
+
+{% endblock back_to %}

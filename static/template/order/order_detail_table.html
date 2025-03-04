@@ -1,0 +1,36 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+<!-- 表格标题 -->
+{% block th %}
+<tr>
+    <th>序号</th>
+    <th>款式码</th>
+    <th>数量</th>
+    <th>单价</th>
+ 
+</tr>
+{% endblock th %}
+
+<!-- 表格内容 -->
+{% block td %}
+
+{%for i in order_detail_info%}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{i.sku_id}}</td>
+    <td>{{i.sku_num}}</td>
+    <td>{{i.sku_price}}</td>
+    <td>
+        <form action="{% url 'order:order_detail' order_id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="sku_id" value="{{ i.sku_id }}">
+        <input type="hidden" name="delete_item" value="1">
+        <input class="btn btn-danger w-100" type="submit" value="删除">
+    </form>
+    </td>
+    
+   
+</tr>
+{%endfor%}
+
+{% endblock td %}

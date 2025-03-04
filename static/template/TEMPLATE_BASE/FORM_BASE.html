@@ -1,0 +1,75 @@
+{% extends 'TEMPLATE_BASE/LOGINED_BASE.html' %}
+{% block content %}
+<style>
+    /* 自定义表单容器样式 */
+   .custom-form-container {
+        background-color: #f8f9fa; /* 淡灰色背景 */
+        border-radius: 10px; /* 圆角 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+        padding: 30px; /* 内边距 */
+    }
+
+    /* 自定义标题样式 */
+   .custom-title {
+        color: #343a40; /* 深灰色文本 */
+        margin-bottom: 30px; /* 底部间距 */
+    }
+
+    /* 自定义按钮样式 */
+   .custom-btn {
+        background-color: #007bff; /* 蓝色背景 */
+        color: white; /* 白色文本 */
+        border: none; /* 去除边框 */
+        border-radius: 5px; /* 圆角 */
+        padding: 10px 20px; /* 内边距 */
+        transition: background-color 0.3s ease; /* 过渡效果 */
+    }
+
+   .custom-btn:hover {
+        background-color: #0056b3; /* 鼠标悬停时颜色变深 */
+        color: white; /* 保持文本白色 */
+    }
+
+    /* 自定义返回按钮样式 */
+   .custom-back-btn {
+        border-color: #007bff; /* 边框颜色 */
+        color: #007bff; /* 文本颜色 */
+        border-radius: 5px; /* 圆角 */
+        padding: 10px 20px; /* 内边距 */
+        transition: all 0.3s ease; /* 过渡效果 */
+    }
+
+   .custom-back-btn:hover {
+        background-color: #007bff; /* 鼠标悬停时背景变蓝 */
+        color: white; /* 文本变白 */
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-center">
+        <p class="col-md-12 text-center fs-1 custom-title">
+            <!-- 标题 -->
+            {% block title %}
+            this is form base
+            {% endblock title %}
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 custom-form-container">
+            <!-- 表单提交地址 -->
+            <form action="
+            {% block form_url %}
+
+            {% endblock form_url %}
+            " method="post" enctype="multipart/form-data"
+            class="">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% block form %}
+                    <!-- 表单输入 -->
+                    {% endblock form %}
+                </div>
+            </form>
+            <!-- 返回地址 -->
+            <a href="#" onclick="window.location.href = document.referrer; return false;">返回上一页</a>
+{% endblock content %}

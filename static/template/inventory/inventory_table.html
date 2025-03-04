@@ -1,0 +1,44 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+{% block th %}
+
+<tr>
+    <th>图片</th>
+    <th>名称</th>
+    <th>条码</th>
+    <th>sku</th>
+    <th>数量</th>
+    <th>库位</th>
+    <th>尺码</th>
+    <th>颜色</th>
+    <th>成本价</th>
+    <th>零售价</th>
+    <th>备注</th>
+</tr>
+{% endblock th %}
+
+{% block td %}
+
+{%for i in page_obj%}
+<tr>
+
+    <td><img src="{{i.img}}" class="img-thumbnail" style="width: 100px;"></td>
+    <td>{{i.name}}</td>
+    <td>
+        <a href="{% url 'style:download_barcode' i.id %}">
+            <img src="{{i.barcode}}" class="img-thumbnail"
+                style="width: 100px;">
+        </a>
+    </td>
+    <td>{{i.id}}</td>
+    <td>{{i.stock}}</td>
+    <td>{{i.storage_location}}</td>
+    <td>{{i.size}}</td>
+    <td>{{i.color}}</td>
+    <td>{{i.cost}}</td>
+    <td>{{i.price}}</td>
+    <td>{{i.remark}}</td>
+
+</tr>
+{%endfor%}
+{% endblock td %}

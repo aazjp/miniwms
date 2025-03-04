@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="{%url 'main:register_view'%}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="用户名" required autofocus>
+        <input type="password" name="password" placeholder="密码" required autofocus>
+        <button type="submit">注册</button>
+
+    </form>
+    <p>{{msg}}</p>
+    <button>
+        <a href="{%url 'main:login_view'%}">返回</a>
+    </button>
+</body>
+
+</html>

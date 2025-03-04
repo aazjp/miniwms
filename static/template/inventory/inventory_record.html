@@ -1,0 +1,89 @@
+{% extends 'TEMPLATE_BASE\LOGINED_BASE.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h1>
+            <p class="text-center col-12">出入库记录</p>
+        </h1>
+
+    </div>
+</div>
+<form action="{% url 'inventory:inventory_record' %}" method="get">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <label for="sku_id">SKU ID</label>
+            <input type="text" class="form-control" id="sku_id" name="sku_id"
+                placeholder="请输入SKU ID">
+        </div>
+        <div class="col">
+            <label>操作类型</label>
+            <select multiple name="operation_type" class="form-control" id>
+                <option value="扫码入库" selected>扫码入库</option>
+                <option value="扫码出库" selected>扫码出库</option>
+                <option value="订单出库" selected>订单出库</option>
+            </select>
+
+        </div>
+        <div class="col">
+            <label for="storage_location">库位</label>
+            <select multiple name="storage_location" class="form-control"
+                id="storage_location">
+                {% for i in storage_location_list %}
+                <option value="{{i.id}}" selected>{{i.location}}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <div class="col">
+            <label for="operator">操作员</label>
+            <select multiple name="operator" class="form-control" id="opertor">
+
+                {% for i in operator_list %}
+                <option value="{{i.username}}" selected>{{i.username}}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="quantity_start">起始数量</label>
+            <input type="number" class="form-control" id="quantity_start"
+                name="quantity_start"
+                placeholder="请输入起始数量">
+
+        </div>
+        <div class="col">
+            <label for="quantity_end">结束数量</label>
+            <input type="number" class="form-control" id="quantity_end"
+                name="quantity_end"
+                placeholder="请输入结束数量">
+        </div>
+        <div class="col">
+            <label for="create_time_start">起始时间</label>
+            <input type="date" class="form-control" id="create_time_start"
+                name="create_time_start"
+                placeholder="请输入起始时间">
+
+        </div>
+        <div class="col">
+            <label for="create_time_end">结束时间</label>
+            <input type="date" class="form-control" id="create_time_end"
+                name="create_time_end"
+                placeholder="请输入结束时间">
+        </div>
+    </div>
+    <p>
+        <div class="row">
+            <input type="submit" class="btn btn-primary w-100" value="查询">
+
+        </div>
+    </p>
+</form>
+
+{% include 'inventory\inventory_record_table.html' %}
+{% include 'pagination.html' %}
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'TEMPLATE_BASE/LOGINED_BASE.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 ms-auto me-auto">
+            <form action="{%url 'order:order_detail' order_id%}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <label for="sku_code_insert">SKU</label>
+                        <input type="text" class="form-control"
+                            name="sku_code_insert" id="sku_code_insert"
+                            autofocus><br>
+                    </div>
+                    <div class="col">
+                        <label for="quantity_insert">数量</label>
+                        <input type="number" class="form-control"
+                            name="quantity_insert" id="quantity_insert"><br>
+                    </div>
+                </div>
+
+                <p>
+                    <input class="btn btn-primary w-100" type="submit"
+                        value="添加">
+                </p>
+
+            </form>
+
+            {%if messages%}
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+            {%endif%}
+
+            {% include 'order/order_detail_table.html' %}
+            <p>总金额：{{total_price}}</p>
+            <form action="{% url 'order:order_detail' order_id %}"
+                method="post">
+                {% csrf_token %}
+                <!-- 其他表单字段 -->
+                <input type="text" name="sku_code_insert" placeholder="输入商品条码">
+                <!-- 提交订单按钮 -->
+                <button type="submit" name="submit_order">提交订单</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+{%endblock%}

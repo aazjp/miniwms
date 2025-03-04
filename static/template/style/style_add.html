@@ -1,0 +1,49 @@
+{% extends 'TEMPLATE_BASE\FORM_BASE.html' %}
+
+{% block title %}
+添加款式
+{% endblock title %}
+
+{% block form_url %}
+
+{% endblock form_url %}
+
+{% block form %}
+<label for="img">添加图片</label>
+<input type="file" class="form-control" id="img" name="img" placeholder="请上传图片">
+<label for="id">款号</label>
+<input type="text" class="form-control" id="id" name="id" placeholder="{{id}}">
+<label for="color">颜色</label>
+<input class="form-control" id="color" name="color" placeholder="请输入颜色">
+<label for="size">尺码</label>
+<input class="form-control" id="size" name="size" placeholder="请输入尺码">
+<label for="name">款式名称</label>
+<input class="form-control" id="name" name="name" placeholder="请输入款式名称">
+<label for="season">季节</label>
+<input class="form-control" id="season" name="season" placeholder="请输入季节">
+<label for="pattern_design">版型</label>
+<input class="form-control" id="pattern_design" name="pattern_design"
+    placeholder="请输入版型">
+<label for="design_source">设计来源</label>
+<input class="form-control" id="design_source" name="design_source"
+    placeholder="请输入设计来源">
+<label for="cost">成本</label>
+<input class="form-control" id="cost" name="cost" placeholder="请输入成本">
+<label for="price">价格</label>
+<input class="form-control" id="price" name="price" placeholder="请输入价格">
+<label for="remark">备注</label>
+<p>
+    <textarea class="form-control" id="remark" name="remark"
+        placeholder="请输入备注"></textarea>
+</p>
+
+<p>
+    <input class="btn btn-primary w-100" type="submit" value="提交">
+
+</p>
+{%if messages%}
+{% for message in messages %}
+{{message}}
+{% endfor %}
+{%endif%}
+{% endblock form %}

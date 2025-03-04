@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="79.500mm" height="38.764mm">
+    
+    <g id="barcode_group">
+        <rect width="100%" height="100%" style="fill:white" />
+        <rect x="6.500mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="7.900mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="9.300mm" y="17.000mm" width="2.800mm" height="15.000mm" style="fill:black;" />
+        <rect x="12.800mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="14.900mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="17.700mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="19.800mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="21.900mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="24.000mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="26.800mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="29.600mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="31.700mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="33.800mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="37.300mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="38.700mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="40.100mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="41.500mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="44.300mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="46.400mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="48.500mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="51.300mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="54.800mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="56.200mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="59.000mm" y="17.000mm" width="1.400mm" height="15.000mm" style="fill:black;" />
+        <rect x="61.100mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="63.200mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="66.000mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="69.500mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="70.900mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <rect x="72.300mm" y="17.000mm" width="0.700mm" height="15.000mm" style="fill:black;" />
+        <text x="39.750mm" y="36.000mm" style="fill:black;font-size:10pt;text-anchor:middle;">2312123123183</text>
+    </g>
+<text x="10" y="45" fill="black" font-size="50">s</text></svg>

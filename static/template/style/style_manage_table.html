@@ -1,0 +1,60 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+{% block th %}
+
+<tr>
+    <th>款号</th>
+    <th>图片</th>
+    <th>款式名称</th>
+    <th>季节</th>
+    <th>版型设计</th>
+    <th>设计来源</th>
+    <th>sku</th>
+    <th>成本价</th>
+    <th>销售价</th>
+    <th>备注</th>
+    <th>创建时间</th>
+    <th>更新时间</th>
+    <th>操作</th>
+</tr>
+{% endblock th %}
+
+{% block td %}
+
+{% for spu in page_obj %}
+<tr>
+    <td>{{spu.id}}</td>
+
+    <td><img class="img-thumbnail" style="width:  150px;"
+            src="{{spu.img}}" alt></td>
+
+    <td>{{spu.name}}</td>
+    <td>{{spu.season}}</td>
+    <td>{{spu.pattern_design}}</td>
+    <td>{{spu.design_source}}</td>
+    <td>
+        <div style="overflow:auto;word-break:keep-all;">
+            <ul>
+                {% for sku_item in spu.sku %}
+               <li> {{sku_item}}</li>
+                {% endfor %}
+             </ul>
+        </div>
+
+    </td>
+    <td>{{spu.cost}}</td>
+    <td>{{spu.price}}</td>
+
+    <td>{{spu.remark}}</td>
+    <td>{{spu.create_date}}</td>
+    <td>{{spu.update_date}}</td>
+    <td>
+        <a href="{% url 'style:style_detail' spu.id %}">详情</a>
+        <a href="{% url 'style:style_update' spu.id %}">编辑</a>
+        <a href="{% url 'style:style_del' spu.id %}">删除</a>
+    </td>
+</tr>
+
+{% endfor %}
+
+{% endblock td %}

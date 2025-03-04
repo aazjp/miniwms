@@ -1,0 +1,41 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+
+{% block th %}
+    <tr>
+        <th>sku</th>
+        <th>条形码</th>
+        <th>颜色</th>
+        <th>尺码</th>
+        <th>库存</th>
+        <th>库位</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+    </tr>
+{% endblock th %}
+    
+
+{% block td %}
+    
+    {% for sku in sku_list %}
+    <tr>
+        <td>{{ sku.id }}</td>
+        <td>
+            <a href="{% url 'style:download_barcode' sku.id %}">
+            <img src="{{ sku.barcode}}" alt="">
+
+            </a>
+        </td>
+        <td>{{sku.color}}</td>
+        <td>{{sku.size}}</td>
+        <td>{{sku.stock}}</td>
+        
+        <td>{{sku.location_name}}</td>
+        <td>{{sku.create_time}}</td>
+        <td>{{sku.update_time}}</td>
+       
+    {% endfor %}
+        
+
+{% endblock td %}
+    

@@ -1,0 +1,36 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+{% block th %}
+<tr>
+    <th>客户编号</th>
+    <th>客户名称</th>
+    <th>客户电话</th>
+    <th>客户地址</th>
+    <th>客户邮箱</th>
+    <th>客户备注</th>
+    <th>创建时间</th>
+    <th>操作</th>
+</tr>
+{% endblock th %}
+
+{% block td %}
+
+{% for customer in page_obj %}
+
+<tr>
+    <td>{{customer.id}}</td>
+    <td>{{customer.name}}</td>
+    <td>{{customer.phone}}</td>
+    <td>{{customer.address}}</td>
+    <td>{{customer.email}}</td>
+    <td>{{customer.remark}}</td>
+    <td>{{customer.create_time}}</td>
+    <td>
+        <a href="{% url 'customer:customer_edit' customer.id%}">编辑</a>
+        <a href="{% url 'customer:customer_del' customer.id%}">删除</a>
+    </td>
+</tr>
+
+{% endfor %}
+
+{% endblock td %}

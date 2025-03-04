@@ -1,0 +1,47 @@
+{% extends 'TEMPLATE_BASE/LOGINED_BASE.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <p class="col-md-12 text-center fs-1">
+            <!-- 标题 -->
+            {% block title %}
+            添加设计师
+            {% endblock title %}
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 bg-danger-subtle  ms-auto me-auto">
+            <!-- 表单提交地址 -->
+            <form action="
+            {% block form_url %}
+
+            {% endblock form_url %}
+            " method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% block form %}
+                    <!-- 表单输入 -->
+                    {% endblock form %}
+                </div>
+            </form><br>
+            <!-- 返回地址 -->
+            <a href="
+            {% block back_to %}
+            
+            {% endblock back_to %}
+            ">
+                <button class="btn btn-outline-primary w-100  mb-3">返回</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% block modal %}
+    
+{% endblock modal %}
+
+{% endblock content %}
+
+
+    

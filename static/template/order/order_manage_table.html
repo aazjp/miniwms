@@ -1,0 +1,36 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+<!-- 表格标题 -->
+{% block th %}
+<tr>
+    <th>订单编号</th>
+    <th>订单创建日期</th>
+    <th>顾客</th>
+    <th>订单金额</th>
+    <th>操作</th>
+ 
+</tr>
+{% endblock th %}
+
+<!-- 表格内容 -->
+{% block td %}
+
+{%for i in page_obj%}
+<tr>
+    <td>{{i.order_id}}</td>
+    <td>{{i.date}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.total_price}}</td>
+    <td>
+        {% if i.status == 0 %}
+            <a class="btn btn-outline-primary w-100 fs-7"
+            href="{%url 'order:order_detail' i.order_id %}">修改</a>
+        {% else %}
+            <a class="btn btn-outline-warning text-danger-emphasis w-100 fs-7"
+            href="">无法修改,订单已结束</a>
+        {% endif %}
+    </td>
+</tr>
+{%endfor%}
+
+{% endblock td %}

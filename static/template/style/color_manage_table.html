@@ -1,0 +1,28 @@
+{% extends 'TEMPLATE_BASE\TABLE_BASE.html' %}
+
+
+{% block th %}
+<tr>
+
+    <th>颜色id</th>
+    <th>颜色名称</th>
+    <th>操作</th>
+</tr>
+{% endblock th %}
+    
+
+
+{% block td %}
+    
+    {% for color in page_obj %}
+    <tr>
+        <td>{{color.id}}</td>
+        <td>{{color.name}}</td>
+        <td>
+            <a href="{% url 'style:color_del' color.id %}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+        
+{% endblock td %}
+    

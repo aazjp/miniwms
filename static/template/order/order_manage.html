@@ -1,0 +1,89 @@
+{%extends 'TEMPLATE_BASE\LOGINED_BASE.html'%}
+{%block content%}
+<div class="container">
+    <!-- 标题 -->
+    <div class="row">
+        <p class="col-md-12 text-center fs-1">订单管理</p>
+    </div>
+    <div class="row">
+        <!-- 新增按钮 -->
+        <div class="col-md-4 me-auto ms-auto">
+            <hr>
+            <a class="btn btn-primary  w-100"
+                href="{%url 'order:order_add' %}">新建订单</a>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'order:order_manage' %}" method="get">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col">
+                        <label for="order_id" class="form-label">订单编号</label>
+                        <input type="text" class="form-control" id="order_id"
+                            name="order_id" placeholder="请输入订单编号"><br>
+                            
+                    </div>
+                    <div class="col">
+                        <label for="order_status" class="form-label">订单状态</label>
+                            <select multiple class="form-select"
+                                name="order_status">
+                                <option value="0" selected>未提交</option>
+                                <option value="1" selected>已提交</option>
+                               
+                            </select>
+                    </div>
+                    <div class="col">
+                        <label for="customer_name" class="form-label">客户名称</label>
+                        <select multiple class="form-select"
+                            name="customer_name">
+                            
+                            {% for i  in customer_list %}
+                                <option selected value="{{i.name}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                   
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="create_time_start" class="form-label">起始创建时间</label>
+                        <input type="date" class="form-control" id="create_time_start"
+                            name="create_time_start" placeholder="请输入创建时间">
+
+                    </div>
+                    <div class="col">
+                        <label for="create_time_end" class="form-label">结束创建时间</label>
+                        <input type="date" class="form-control" id="create_time_end"
+                            name="create_time_end" placeholder="请输入创建时间">
+                    </div>
+                    <div class="col">
+                        <label for="total_price_start" class="form-label">起始总金额</label>
+                        <input type="number" class="form-control" id="total_price_start"
+                            name="total_price_start" placeholder="请输入总金额">
+                    </div>
+                    <div class="col">
+                        <label for="total_price_end" class="form-label">结束总金额</label>
+                        <input type="number" class="form-control" id="total_price_end"
+                            name="total_price_end" placeholder="请输入总金额">
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-primary w-100" value="查询">
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            {% include 'order/order_manage_table.html' %}
+
+        </div>
+    </div>
+</div>
+{% include 'pagination.html' %}
+{%endblock%}

@@ -1,0 +1,44 @@
+{% extends 'TEMPLATE_BASE\LOGINED_BASE.html' %}
+
+{% block content %}
+
+<div class="container p-3">
+    <div class="row"><h1 class="text-center">管理颜色</h1></div>
+    <div class="row">
+        <form class="form-group row g-1"
+            action="{% url 'style:color_manage' %}"
+            method="post">
+            {% csrf_token %}
+            <div class="row g-1">
+                <div class="col-4">
+                    <input type="text" class="form-control" name="id"
+                        placeholder="颜色id" autofocus>
+                    <small>三位数</small>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" name="name"
+                        placeholder="颜色名称" >
+                </div>
+
+                <div class="col-4">
+                    <input type="submit" class="btn btn-primary w-100"
+                        value="提交">
+                </div>
+            </div>
+        </form>
+
+        {% if messages %}
+
+        {% for msg in messages %}
+        {{ msg }}
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% include 'style\color_manage_table.html' %}
+{% include 'pagination.html' %}
+{% endblock content %}
