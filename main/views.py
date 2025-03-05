@@ -26,7 +26,7 @@ def login_view(request):
             return redirect(reverse('index:index'))
         else:
             logging.info("登录失败")
-            return redirect(reverse('main:login_view'))
+            return redirect(reverse('main:login'))
 
 # 登出
 def logout_view(request):
