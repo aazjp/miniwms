@@ -1,15 +1,12 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse
-# pip install python-barcode
 import logging
 from utils import *
 from django.contrib import messages
 import datetime
 from miniwms.settings import MEDIA_URL
 from django.core.paginator import Paginator
-# from barcode.writer import ImageWriter
-# Create your views here.
-
+from django.contrib.auth.decorators import login_required
 
 def download_barcode(request, id):
     import miniwms.settings as settings

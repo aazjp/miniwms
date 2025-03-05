@@ -8,8 +8,9 @@ from django.contrib import messages
 import re
 from utils import exe_sql_dict
 from django.core.paginator import Paginator
-from django.db import transaction
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 def order_manage(request):
     if request.method == 'GET':
         base_sql = '''
