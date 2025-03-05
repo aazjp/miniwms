@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container p-3">
-    <div class="row"><h1 class="text-center">管理颜色</h1></div>
+    <div class="row"><h1>添加颜色</h1></div>
     <div class="row">
         <form class="form-group row g-1"
             action="{% url 'style:color_manage' %}"
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" name="name"
-                        placeholder="颜色名称" >
+                        placeholder="颜色名称">
                 </div>
 
                 <div class="col-4">
@@ -36,6 +36,27 @@
         {% endif %}
 
     </div>
+    <div class="row"><h1>搜索颜色</h1></div>
+    <form action="{% url 'style:color_manage' %}" method="get">
+        <div class="row">
+            <div class="col">
+                <label for="color_id">颜色id</label>
+                <input type="text" class="form-control" name="color_id"
+                    placeholder="颜色id" autofocus>
+
+            </div>
+            <div class="col">
+                <label for="color_name">颜色名称</label>
+                <input type="text" class="form-control" name="color_name"
+                    placeholder="颜色名称">
+            </div>
+            
+            <div class="col">
+                <label for=""></label>
+                <input type="submit" class="btn btn-primary w-100">
+            </div>
+        </div>
+    </form>
 
 </div>
 

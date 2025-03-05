@@ -34,7 +34,7 @@ def style_manage(request):
         ON sp.id = sk.spu_id 
         {}
         GROUP BY sp.id;'''
-        where_clause,params=(search_spu(request))
+        where_clause,params=search_spu(request)
         if where_clause:
             sub_sql = 'where '+' and '.join(where_clause)
             sql = base_sql.format(sub_sql)
@@ -53,8 +53,6 @@ def style_manage(request):
         # 获取当前页码，默认为第 1 页
         page_number = request.GET.get('page')
         # # 获取当前页的对象
-        # param_list = [f"{key}={value}" for key, value in request.GET.items() if key != 'page']
-        # param_str = '&'.join(param_list)
         page_obj = paginator.get_page(page_number)
         
         data = {
@@ -285,8 +283,17 @@ def search_spu(request):
 
 def color_manage(request):
     if request.method == 'GET':
-        sql = "SELECT * FROM style_color order by id desc"
-        color_list = exe_sql(sql)
+        base_sql = "SELECT * FROM style_color {} order by id desc"
+        where_clause,params = search_color(request)
+        if where_clause:
+            sub_sql = 'where '+' and '.join(where_clause)
+            sql = base_sql.format(sub_sql)
+            logging.debug(sql)
+            color_list = exe_sql_dict(sql, params)
+        else:
+            sql = base_sql.format('')
+            logging.debug(sql)
+            color_list = exe_sql_dict(sql)
 
         paginator = Paginator(color_list, 10)
         page_number = request.GET.get('page')
@@ -314,3 +321,16 @@ def color_del(request,id):
     sql = "DELETE FROM style_color WHERE id = ?"
     exe_sql(sql,(id,))
     return redirect(reverse('style:color_manage'))
+
+def search_color(request):
+    where_clause =[]
+    parmas = []
+    color_id = request.GET.get('color_id')
+    if color_id:
+        where_clause.append("id like ?")
+        parmas.append(f'%{color_id}%')
+    color_name = request.GET.get('color_name')
+    if color_name:
+        where_clause.append("name like ?")
+        parmas.append(f'%{color_name}%')
+    return where_clause,parmas
