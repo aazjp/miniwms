@@ -45,6 +45,40 @@
             </div>
         </form>
     </div>
+</div>
+
+<div class="container p-3">
+    <div class="row">
+        <h1>搜索客户</h1>
+    </div>
+    <div class="row">
+        <form action="{% url 'customer:search_customer' %}" method="get">
+            <label for="customer_id">客户编号</label>
+            <input type="text" class="form-control" name="customer_id"
+                placeholder="客户编号">
+            <label for="customer_name">客户名称</label>
+            <input type="text" class="form-control" name="customer_name"
+                placeholder="客户名称">
+            <label for="customer_phone">客户电话</label>
+            <input type="text" class="form-control" name="customer_phone"
+                placeholder="客户电话">
+                
+            <label for="customer_email">客户邮箱</label>
+            <input type="text" class="form-control" name="customer_email"
+                placeholder="客户邮箱">
+            <label for="customer_address">客户地址</label>
+            <input type="text" class="form-control" name="customer_address"
+                placeholder="客户地址">
+            <label for="remark">客户备注</label>
+            <input type="text" class="form-control" name="remark"
+                placeholder="客户备注">
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary w-100"
+                    value="提交">
+            </div>
+
+        </form>
+    </div>
 
 </div>
 

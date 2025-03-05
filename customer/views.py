@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
-from . import models
 import datetime
-from utils import exe_sql
+from utils import exe_sql,exe_sql_dict
 import logging
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -25,11 +24,26 @@ def customer_manage(request):
 
     logging.debug(customer_id_add)
     if request.method == 'GET':
-        
         logging.debug(customer_id_add)
+        base_sql = '''
+        select 
+            * 
+        from 
+            customer_customer
+        {}
+        '''
         
-        customer_info =exe_sql('''select * from customer_customer''')
-
+        where_clause,params=search_customer(request)
+        if where_clause:
+            sub_sql = 'where '+' and '.join(where_clause)
+            sql = base_sql.format(sub_sql)
+            logging.debug(sql)
+            customer_info = exe_sql_dict(sql, params)
+        else:
+            sql = base_sql.format('')
+            logging.debug(sql)
+            customer_info = exe_sql_dict(sql)
+        
         paginator = Paginator(customer_info, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -137,3 +151,40 @@ def customer_edit(request,customer_id):
             exe_sql(sql, params)
         
         return redirect(reverse('customer:customer_manage'))
+    
+def search_customer(request):
+    where_clause = []
+    params = []
+    customer_id  = request.GET.get('customer_id')
+    if customer_id:
+        where_clause.append("id like ?")
+        params.append(f'%{customer_id}%')
+    
+    customer_name = request.GET.get('customer_name')
+    if customer_name:
+        where_clause.append("name like ?")
+        params.append(f'%{customer_name}%')
+    
+    customer_phone = request.GET.get('customer_phone')
+    if customer_phone:
+        where_clause.append("phone like ?")
+        params.append(f'%{customer_phone}%')
+    
+    customer_address = request.GET.get('customer_address')
+    if customer_address:
+        where_clause.append("address like ?")
+        params.append(f'%{customer_address}%')
+    
+    customer_email = request.GET.get('customer_email')
+    if customer_email:
+        where_clause.append("email like ?")
+        params.append(f'%{customer_email}%')
+    
+    customer_remark = request.GET.get('customer_remark')
+    if customer_remark:
+        where_clause.append("remark like ?")
+        params.append(f'%{customer_remark}%')
+    
+    
+    return where_clause, params
+    ...
