@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import permission_required
 
 
 def download_barcode(request, id):
-    import miniwms.settings as settings
     barcode_dir = style_models.sku.objects.filter(id=id).first().barcode
     logging.info('founded barcode code')
     # try:
@@ -57,7 +56,6 @@ def style_manage(request):
         
         data = {
             'page_obj': page_obj,
-            # 'param_str': param_str
         }
         return render(request, 'style/style_manage.html', data)
 
