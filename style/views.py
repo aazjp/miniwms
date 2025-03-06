@@ -6,7 +6,9 @@ from django.contrib import messages
 import datetime
 from miniwms.settings import MEDIA_URL
 from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
+
+
 
 def download_barcode(request, id):
     import miniwms.settings as settings
@@ -21,6 +23,7 @@ def download_barcode(request, id):
     r["Content-Disposition"] = "attachment;filename=" + id + ".svg"
     return r
 
+@permission_required('')
 def style_manage(request):
     if request.method == 'GET':
         base_sql = '''

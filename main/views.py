@@ -32,8 +32,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     logging.info("退出登录s")
-    return redirect(reverse('main:login_view'))
-
+    return redirect(reverse('main:login'))
 
 # 注册
 def register_view(request):

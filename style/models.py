@@ -15,6 +15,13 @@ class spu(models.Model):
     remark = models.CharField(max_length=20,null=True)
     create_date=models.DateTimeField(null=True)
     update_date=models.DateTimeField(null=True)
+    # class Meta:
+    #     permissions = [
+    #         ('can_view_spu', 'Can view spu'),
+    #         ('can_add_spu', 'Can add spu'),
+    #         ('can_update_spu', 'Can update spu'),
+    #         ('can_delete_spu', 'Can delete spu')
+    #     ]
     
 class sku(models.Model):
     id=models.CharField(max_length=20,primary_key=True)
@@ -26,9 +33,11 @@ class sku(models.Model):
     update_date=models.DateTimeField(null=True)
 
 
+
 class color(models.Model):
     id=models.CharField(max_length=20,primary_key=True)
     name=models.CharField(max_length=20)
     create_date=models.DateTimeField(null=True)
     update_date=models.DateTimeField(null=True)
+
     
