@@ -7,7 +7,7 @@ import datetime
 from miniwms.settings import MEDIA_URL
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import permission_required
-
+from .permission import ADD_SPU,CHANGE_SPU,DELETE_SPU,VIEW_SPU,DOWNLOAD_BARCODE,SEARCH_SPU
 
 
 def download_barcode(id):
@@ -16,11 +16,11 @@ def download_barcode(id):
     # try:
     img_dir =barcode_dir[1:]
     logging.info('barcode_dir:'+img_dir)
-    r = HttpResponse(open(img_dir, "r"))
+    img = HttpResponse(open(img_dir, "r"))
     logging.info('success opened:'+img_dir)
-    r["content_type"] = "application/octet-stream"
-    r["Content-Disposition"] = "attachment;filename=" + id + ".svg"
-    return r
+    img["content_type"] = "application/octet-stream"
+    img["Content-Disposition"] = "attachment;filename=" + id + ".svg"
+    return img
 
 def style_manage(request):
     if request.method == 'GET':
@@ -60,12 +60,20 @@ def style_manage(request):
 
 def style_add(request):
     if request.method == 'GET':
+        
+        if not request.user.has_perm(ADD_SPU):
+            return render(request, 'perm_denied.html')
+            
         id = auto_make_spu_code()
         data = {
             'id':id,
         }
         return render(request, 'style/style_add.html', data)
     if request.method == 'POST':
+
+        if not request.user.has_perm(ADD_SPU):
+            return render(request, 'perm_denied.html')
+        
         # id
         id = request.POST.get('id')
         if not id:
@@ -122,6 +130,10 @@ def style_add(request):
         return redirect(reverse('style:style_add'))
     
 def style_del(request,id):
+
+    if not request.user.has_perm(DELETE_SPU):
+        return render(request, 'perm_denied.html')
+    
     sql = "DELETE FROM style_sku WHERE spu_id = ?"
     exe_sql(sql,(id,))
     sql = "DELETE FROM style_spu WHERE id = ?"
@@ -132,6 +144,10 @@ def style_update(request,id):
     sql = "SELECT * FROM style_spu WHERE id = ?"
     spu = exe_sql(sql,(id,))
     if request.method == 'GET':
+
+        if not request.user.has_perm(CHANGE_SPU):
+            return render(request, 'perm_denied.html')
+        
         sql = "SELECT * FROM style_spu WHERE id = ?"
         spu = exe_sql(sql,(id,))
         data  = {
@@ -139,6 +155,10 @@ def style_update(request,id):
         }
         return render(request,'style/style_update.html',data)
     if request.method == 'POST':
+        
+        if not request.user.has_perm(CHANGE_SPU):
+            return render(request, 'perm_denied.html')
+        
         img = request.FILES.get('img')
         if img:
             img_dir =MEDIA_URL+ save_image_to_path(img,'style/spu/')
@@ -173,6 +193,9 @@ def style_update(request,id):
         return redirect(reverse('style:style_manage'))
     
 def style_detail(request,id):
+
+    
+    
     sql = '''
     SELECT 
         sk.*,
