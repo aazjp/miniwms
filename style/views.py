@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import permission_required
 
 
 
-def download_barcode(request, id):
+def download_barcode(id):
     barcode_dir = style_models.sku.objects.filter(id=id).first().barcode
     logging.info('founded barcode code')
     # try:
@@ -22,7 +22,6 @@ def download_barcode(request, id):
     r["Content-Disposition"] = "attachment;filename=" + id + ".svg"
     return r
 
-@permission_required('')
 def style_manage(request):
     if request.method == 'GET':
         base_sql = '''
