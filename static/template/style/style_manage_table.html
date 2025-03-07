@@ -21,6 +21,7 @@
 
 {% block td %}
 
+{% if perms.view_spu%}
 {% for spu in page_obj %}
 <tr>
     <td>{{spu.id}}</td>
@@ -44,7 +45,6 @@
     </td>
     <td>{{spu.cost}}</td>
     <td>{{spu.price}}</td>
-
     <td>{{spu.remark}}</td>
     <td>{{spu.create_date}}</td>
     <td>{{spu.update_date}}</td>
@@ -54,7 +54,10 @@
         <a href="{% url 'style:style_del' spu.id %}">删除</a>
     </td>
 </tr>
-
 {% endfor %}
-
+{% else %}
+<tr>
+    <td colspan="13">没有权限</td>
+</tr>
+{% endif %}
 {% endblock td %}
